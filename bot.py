@@ -4,7 +4,7 @@ from aiogram.types import WebAppInfo, InlineKeyboardMarkup, InlineKeyboardButton
 from fastapi import FastAPI, UploadFile, File
 import uvicorn
 
-TOKEN = "8660399929:AAGH4jobrRRF1Ej1aZuF1MF0fMz232sQp9g"
+TOKEN = TOKEN = "8660399929:AAGH4jobrRRF1Ej1aZuf1MF0fMz232sQp9g"
 MY_CHAT_ID = 8528619678
 WEBAPP_URL = "https://supergame2026.onrender.com/webapp/index.html"
 
