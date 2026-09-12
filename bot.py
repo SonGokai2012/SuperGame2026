@@ -4,7 +4,7 @@ from aiogram.types import WebAppInfo, InlineKeyboardMarkup, InlineKeyboardButton
 from fastapi import FastAPI, UploadFile, File
 import uvicorn
 
-TOKEN = 8660399029:AAGH4jobrRRFlEj1aZuflMF0fMz232sQp9g
+TOKEN = "8660399029:AAGH4jobrRRFlEj1aZuflMF0fMz232sQp9g"
 MY_CHAT_ID = 8528619678
 WEBAPP_URL = "https://ЗАМЕНИШЬ_ПОЗЖЕ/webapp/index.html"
 
